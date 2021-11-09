@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (hot)",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--hot"
+            ]
+        }
+    ]
+}
