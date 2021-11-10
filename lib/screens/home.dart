@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:melody/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-double _headerHeight = 60;
-double _bottomBottomHeight = 70;
+double _headerHeight = 88;
+double _bottomBottomHeight = 80;
 
 class Section extends HookWidget {
   const Section({
@@ -81,15 +81,15 @@ class Section extends HookWidget {
   }
 }
 
-_buildNavButton() {
+_buildNavButton({iconPath, onPressed}) {
   return CircleAvatar(
-    radius: 28,
+    radius: 32,
     backgroundColor: Colors.grey.withOpacity(.5),
     child: CircleAvatar(
-      radius: 24,
+      radius: 28,
       backgroundColor: Colors.white.withOpacity(.8),
       child: SvgPicture.asset(
-        'assets/icons/sleep.svg',
+        iconPath,
         color: Colors.black,
         height: 32,
         width: 32,
@@ -113,16 +113,16 @@ class Home extends HookWidget {
     double _offset = _height / 2;
 
     Widget _bottomButtons = Positioned(
-      bottom: _bottomBottomHeight - 14,
+      bottom: _bottomBottomHeight - 18,
       width: _screenWidth,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildNavButton(),
+          _buildNavButton(iconPath: 'assets/icons/focus.svg'),
           const SizedBox(width: 1),
-          _buildNavButton(),
+          _buildNavButton(iconPath: 'assets/icons/relax.svg'),
           const SizedBox(width: 1),
-          _buildNavButton(),
+          _buildNavButton(iconPath: 'assets/icons/sleep.svg'),
         ],
       ),
     );
@@ -212,11 +212,10 @@ class BottomBar extends HookWidget {
         clipBehavior: Clip.antiAlias,
         clipper: BottomBarClipper(),
         child: Container(
-          padding: EdgeInsets.only(top: 14),
+          padding: const EdgeInsets.only(top: 14),
           width: double.infinity,
           color: ColorLib.secondary,
           child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text(
@@ -288,60 +287,72 @@ class Header extends HookWidget {
       height: _headerHeight,
       // width: double.infinity,
       child: Container(
-          color: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/signal.svg',
-                semanticsLabel: 'icon',
-                height: 32,
-                width: 32,
-                fit: BoxFit.contain,
-                color: Colors.white.withOpacity(.8),
-              ),
-              SvgPicture.asset(
-                'assets/icons/bell.svg',
-                semanticsLabel: 'icon',
-                height: 26,
-                width: 26,
-                fit: BoxFit.contain,
-                color: Colors.white.withOpacity(0.8),
-              ),
-            ],
-          )),
+        color: Colors.transparent,
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SvgPicture.asset(
+              'assets/icons/signal.svg',
+              semanticsLabel: 'icon',
+              height: 32,
+              width: 32,
+              fit: BoxFit.contain,
+              color: Colors.white.withOpacity(.8),
+            ),
+            Stack(
+              children: [
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Container(
+                      width: 65,
+                      height: 65,
+                      padding: const EdgeInsets.all(2),
+                      color: Colors.white.withOpacity(.8),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/profile-img.jpg'),
+                          ),
+                          // color: Colors.white.withOpacity(.8),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 3,
+                  child: CircleAvatar(
+                    radius: 12,
+                    backgroundColor: Colors.white,
+                    child: SvgPicture.asset(
+                      'assets/icons/lines.svg',
+                      semanticsLabel: 'icon',
+                      height: 24,
+                      width: 24,
+                      fit: BoxFit.contain,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SvgPicture.asset(
+              'assets/icons/bell.svg',
+              semanticsLabel: 'icon',
+              height: 26,
+              width: 26,
+              fit: BoxFit.contain,
+              color: Colors.white.withOpacity(0.8),
+            ),
+          ],
+        ),
+      ),
     );
   }
-}
-
-class HeaderClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var _height = size.height;
-    var _width = size.width;
-
-    var path = Path()
-      ..lineTo(0, _height)
-      ..lineTo(_width / 5, _height)
-      ..cubicTo(3 * _width / 6, 2 * _height / 2, 3 * _width / 6, 0,
-          4 * _width / 12, 0)
-      ..cubicTo(_width / 12, 2 * _height, 7 * _width / 12, _height,
-          8 * _width / 12, 0)
-      // ..lineTo((_width / 2) - 50, _height)
-
-      // ..lineTo((_width / 2) - 20, _height)
-      // ..lineTo(_width, 0)
-      // ..cubicTo(
-      //     _width / 2, _height, _width / 3, _height / 2, _width / 2, _height / 2)
-      // ..cubicTo(
-      //     _width / 12, 2 * _height / 5, 3 * _width / 12, 0, 4 * _width / 12, 0)
-      // ..cubicTo(x1, y1, x2, y2, x3, y3)
-      ..close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
