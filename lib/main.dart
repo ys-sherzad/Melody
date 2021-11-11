@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
       title: 'Melody',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }

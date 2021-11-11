@@ -6,32 +6,31 @@ class ScaleAnimation extends HookWidget {
   const ScaleAnimation({
     Key? key,
     required this.child,
-    this.delay = const Duration(seconds: 2),
+    required this.delay,
   }) : super(key: key);
 
   final Widget child;
-  final Duration delay;
+  final int delay;
 
   @override
   Widget build(BuildContext context) {
     final _controller = useAnimationController(
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 700),
     );
 
     final _animation = useMemoized(
         () => Tween<double>(begin: 0.0, end: 1.0).animate(
               CurvedAnimation(
                 parent: _controller,
-                curve: Sprung.criticallyDamped,
+                curve: Sprung.underDamped,
               ),
             ),
         [_controller]);
 
     useEffect(() {
-      Future.delayed(delay, () {
+      Future.delayed(Duration(milliseconds: delay), () {
         _controller.forward();
       });
-      return _controller.dispose;
     }, []);
 
     return ScaleTransition(
