@@ -1,5 +1,17 @@
-import 'dart:ui';
 
+
+
+///
+///     (╯ ͡❛ ͜ʖ ͡❛)╯┻━┻
+/// **************************************************************
+/// Instagram @ys.sherzad  *************************
+/// Twitter @ys_sherzad  ********************
+/// **************************************************************
+/// "Make Everyday Count" 🇦🇫
+///
+///
+
+import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
