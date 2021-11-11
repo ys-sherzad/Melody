@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:melody/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:melody/widgets/scale_animation.dart';
 
 double _headerHeight = 88;
 double _bottomBottomHeight = 80;
@@ -292,63 +293,73 @@ class Header extends HookWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset(
-              'assets/icons/signal.svg',
-              semanticsLabel: 'icon',
-              height: 32,
-              width: 32,
-              fit: BoxFit.contain,
-              color: Colors.white.withOpacity(.8),
+            ScaleAnimation(
+              child: SvgPicture.asset(
+                'assets/icons/signal.svg',
+                semanticsLabel: 'icon',
+                height: 32,
+                width: 32,
+                fit: BoxFit.contain,
+                color: Colors.white.withOpacity(.8),
+              ),
             ),
-            Stack(
-              children: [
-                Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Container(
-                      width: 65,
-                      height: 65,
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.white.withOpacity(.8),
+            ScaleAnimation(
+              child: Stack(
+                children: [
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
                       child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/images/profile-img.jpg'),
+                        width: 65,
+                        height: 65,
+                        padding: const EdgeInsets.all(2),
+                        color: Colors.white.withOpacity(.8),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image:
+                                  AssetImage('assets/images/profile-img.jpg'),
+                            ),
+                            // color: Colors.white.withOpacity(.8),
                           ),
-                          // color: Colors.white.withOpacity(.8),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 3,
-                  child: CircleAvatar(
-                    radius: 12,
-                    backgroundColor: Colors.white,
-                    child: SvgPicture.asset(
-                      'assets/icons/lines.svg',
-                      semanticsLabel: 'icon',
-                      height: 24,
-                      width: 24,
-                      fit: BoxFit.contain,
-                      color: Colors.black,
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 3,
+                    child: ScaleAnimation(
+                      delay: const Duration(milliseconds: 2400),
+                      child: CircleAvatar(
+                        radius: 12,
+                        backgroundColor: Colors.white,
+                        child: SvgPicture.asset(
+                          'assets/icons/lines.svg',
+                          semanticsLabel: 'icon',
+                          height: 24,
+                          width: 24,
+                          fit: BoxFit.contain,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            SvgPicture.asset(
-              'assets/icons/bell.svg',
-              semanticsLabel: 'icon',
-              height: 26,
-              width: 26,
-              fit: BoxFit.contain,
-              color: Colors.white.withOpacity(0.8),
+            ScaleAnimation(
+              child: SvgPicture.asset(
+                'assets/icons/bell.svg',
+                semanticsLabel: 'icon',
+                height: 26,
+                width: 26,
+                fit: BoxFit.contain,
+                color: Colors.white.withOpacity(0.8),
+              ),
             ),
           ],
         ),
