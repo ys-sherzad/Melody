@@ -38,6 +38,7 @@ dependencies:
   flutter_vector_icons: ^1.0.0
   flutter_svg: ^0.23.0+1
   animate_do: ^2.0.0
+  sprung: ^3.0.0
 
 dev_dependencies:
   flutter_test:
